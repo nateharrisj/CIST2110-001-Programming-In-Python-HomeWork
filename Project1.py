@@ -24,7 +24,8 @@ def ask_question(question: str, option_1: str, option_2: str, option_3: str, opt
     print(option_2)
     print(option_3)
     print(option_4)
-    answer = input("Answer: ")
+    answer = input("Your Answer: ")
+    answer = answer.lower()
 
     for i in range(0, 5):
         if answer == correct_answer:
