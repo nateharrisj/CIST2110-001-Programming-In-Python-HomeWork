@@ -1,36 +1,87 @@
 # Project1.py
-# Author:
+# Author: Nate Harris
+
+def welcome():
+    print("*************************************************************")
+    print("\n               Welcome to Quizzo!            \n")
+    print("You will be asked a series of multiple choice questions.")
+    print("Answers are either A, B, C, or D.")
+    print("You will get 1 point for each correct letter you choose!\n")
+    print("           May the force be with you!        \n")
+    print("*************************************************************")
+
+def ready():
+    ready = input("Are you ready to play? (y/n): ")
+    if ready == "y" or ready == "Y":
+        print("OK Let's Play! \n")
+    else:
+        print("Have a good day!")
+        exit()
+
+def ask_question(question: str, option_1: str, option_2: str, option_3: str, option_4: str, correct_answer: str) -> bool:
+    print(question)
+    print(option_1)
+    print(option_2)
+    print(option_3)
+    print(option_4)
+    answer = input("Answer: ")
+
+    for i in range(0, 5):
+        if answer == correct_answer:
+            print("That is correct! \n")
+            return True
+        elif answer in ["a", "b", "c", "d"]:
+            print("Sorry, the correct answer is " + correct_answer + " \n")
+            return False
+        else:
+            print("\n Choices are a, b, c, or d. Please try again.\n")
+            print(question)
+            answer = input("Answer: ")
 
 
-# This project is meant to test your ability from everything we have learned so far in class
-# You will need to use variables, if statements, loops, and functions
+def main():
 
-# Quiz Game:
-# Create a simple console-based quiz game where the user answers a series of questions.
-# The game should keep track of the user's score and provide feedback based on the answers given.
+    score = 0
 
-# Write a function that displays a welcome message to the user and explains the rules of the game
+    welcome()
+    ready()
+    if ready:
+        questions =[
+         {
+             "question": "What is the capital of California?",
+             "option_1": "A. Sacramento", "option_2": "B. Los Angeles", "option_3": "C. San Francisco", "option_4": "D. San Diego",
+             "correct_answer": "a"
+         },
+         {
+             "question": "Who played Batman in the Dark Knight?",
+             "option_1": "A. Robert Pattinson", "option_2": "B. Ben Affleck", "option_3": "C. Christian Bale", "option_4": "D. Jim Carey",
+             "correct_answer": "c"
+         },
+         {
+             "question": "What planet is knows as the red planet?",
+                "option_1": "A. Jupiter", "option_2": "B. Mars", "option_3": "C. Saturn", "option_4": "D. Venus",
+                "correct_answer": "b"
+         },
+         {
+             "question": "What is the largest ocean?",
+                "option_1": "A. Atlantic", "option_2": "B. Indian", "option_3": "C. Pacific", "option_4": "D. Arctic",
+                "correct_answer": "c"
+         },
+         {
+             "question": "How many continents are there?",
+                "option_1": "A. 5", "option_2": "B. 6", "option_3": "C. 8", "option_4": "D. 7",
+                "correct_answer": "d"
+         }
+    ]
+        
+    for question in questions:
+        if ask_question(question ["question"], question ["option_1"], question ["option_2"], question ["option_3"], question ["option_4"], question ["correct_answer"]):
+            score +=1
+        else:
+            score +=0
+    print("Your score is " + str(score) + " out of 5!")
+    print("Thanks for playing! \n")
+    exit()
 
-# Implement at least 5 questions, each with 4 answer options (a, b, c, d). Each question should be worth 1 point.
-# For each question, display the question and the answer options to the user.
-# Use input() to get the user's answer.
-# Use if or if-else statements to check if the answer is correct.
-# If the answer is correct, display a positive feedback message and add points to the user's score.
-# If the answer is incorrect, display a negative feedback message and provide the correct answer.
-# Score Tracking:
-
-# Keep track of the user's score throughout the game.
-# After all questions have been answered, display the user's total score and a farewell message.
-# Function Utilization:
-
-# Create a function to ask a question and check the answer. This function should accept parameters like the question, options, and the correct answer, and return whether the user was correct.
-# an example would be def ask_question(question, option_1, option_2, option_3, option_4, correct_answer):
-# the return value should be a boolean (True or False) for whether the user was correct
-
-# Create a function to display the final score, which takes the score as a parameter and displays a message.
-# Loops:
-# Use a for or while loop to iterate through the questions.
-# Variable Casting:
-# Ensure that user input is cast and checked appropriately to avoid errors during execution.
-# Error Handling:
-# Implement basic error handling to manage invalid inputs from the user (e.g., an answer other than a, b, c, or d).
+if __name__ == "__main__":
+    main()
