@@ -8,20 +8,26 @@
 # IE. If the user inputs 3, the function should return 9
 
 def square(x):
-    return x**2
+    x = int(input("Enter a number to be squared: "))
+    print(x, "Squared is ", x**2)
+    #return x**2
 
 # Question 2:
 # Write a function that takes in a string, a letter, and a number and returns the string with the letter replaced at the number index
 # IE. If the user inputs "Hello World", "a", and 3, the function should return "Helao World"
 
-def replace(string, letter, number):
+def replace(string:str, letter:str, number:str):
+    
+    number = int(number) #converts number to an integer
     if number < 0 or number > len(string):
         return "Error: Number is out of bounds"    
 
     user_input = list(string)
-    user_input[number] = letter
+    user_input [number] = letter
     result = ''.join(user_input)
-    return result
+    print("The new string is:", result)
+    #replace(string, letter, number)
+    #return result
 
 
 # Question 3:
@@ -49,22 +55,28 @@ def bounds():
 
 def user_input():
     name = input("Enter your name: ")
-    age = int(input("Enter your age: "))
+    age = str(input("Enter your age: "))
     color = input("Enter your favorite color: ")
     return name, age, color
+
+def print_user(name, age, color):
+    print("Hello, my name is", name, ". I am", age, "years old. My favorite color is", color)
+
 
 # Question 5:
 # import the random module and use it to generate a random number between 1 and 100
 # hint: use the randint() function
 
 import random
+print("here is a random number between 1 and 100: ")
 print(random.randint(1,100))
 
 # Question 6:
 # import the math module and use it to find the square root of 16 (hint: use the sqrt() function)
 
 import math
-print(math.sqrt(81))
+sqr = int(input("Enter a number to be square rooted: "))
+print(math.sqrt(sqr))
 
 # Question 7:
 # import the sys module and use it to display the version of python you are using
@@ -87,15 +99,18 @@ print(getcwd())
 
 
 def main():
-    x = int(input("Enter a number: "))
-    print(x, "Squared is ", square(x))
-    
-    string = input("Enter a string: ")
-    letter = input("Enter a letter: ")
-    number = int(input("Enter a number: "))
-    print("The new string is: ", replace(string, letter, number))
+
+    x = 0
+    square(x)
+
+    print("First enter a name/phrase, then a letter, then a number. When done, press enter: ")
+    string, letter, number = list(map(str,input().split()))
+    replace(string, letter, number)
 
     bounds()
+
+    print_user(*user_input()) # I get why this works, but I don't get why the one below doesn't
+    #print_user(user_input()) 
 
 if __name__ == "__main__":
     main()
