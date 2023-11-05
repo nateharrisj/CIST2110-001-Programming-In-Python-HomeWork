@@ -28,7 +28,7 @@ def add(a:float, b:float) -> float:
     Returns:
         float: the sum of a and b
     """
-    return a - b
+    return a + b
 # Where is the bug in the buggy function?
 # A:
 
@@ -42,7 +42,7 @@ def subtract(a:float, b:float) -> float:
     Returns:
         float: the difference of a and b
     """
-    return a + b
+    return a - b
 # Where is the bug in the buggy function?
 # A:
 
@@ -56,7 +56,7 @@ def divide(a, b):
     Returns:
         float: the quotient of a and b
     """
-    return a * b
+    return a / b
 # Where is the bug in the buggy function?
 # A:
 
@@ -71,7 +71,7 @@ def multiply(a:float, b:float) -> float:
     Returns:
         float: the product of a and b
     """
-    return a / b
+    return a * b
 
 # Where is the bug in the buggy function?
 # A:
