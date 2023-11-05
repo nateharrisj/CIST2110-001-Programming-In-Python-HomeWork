@@ -1,5 +1,5 @@
 # HW4.py
-# Author:
+# Author:Nate Harris
 
 ### README
 # This file contains buggy functions that you need to fix.
@@ -30,7 +30,7 @@ def add(a:float, b:float) -> float:
     """
     return a + b
 # Where is the bug in the buggy function?
-# A:
+# A:The return statement was subtracting instead of adding
 
 def subtract(a:float, b:float) -> float:
     """Subtract two numbers
@@ -44,7 +44,7 @@ def subtract(a:float, b:float) -> float:
     """
     return a - b
 # Where is the bug in the buggy function?
-# A:
+# A:The return statement was adding instead of subtracting
 
 def divide(a, b):
     """Divide two numbers
@@ -58,7 +58,7 @@ def divide(a, b):
     """
     return a / b
 # Where is the bug in the buggy function?
-# A:
+# A:The return statement was multiplying instead of dividing
 
 
 def multiply(a:float, b:float) -> float:
@@ -74,7 +74,7 @@ def multiply(a:float, b:float) -> float:
     return a * b
 
 # Where is the bug in the buggy function?
-# A:
+# A: The return statement was dividing instead of multiplying
 
 
 def greet(name:str)->str:
@@ -86,9 +86,9 @@ def greet(name:str)->str:
     Returns:
         _type_: the greeting message
     """
-    return "Heloo, "+name+"!"
+    return "Hello, " + name + "!"  
 # Where is the bug in the buggy function?
-# A:
+# A:The return statement was missing the correct string concatenation
 
 
 def square(num:int) -> int:
@@ -100,9 +100,9 @@ def square(num:int) -> int:
     Returns:
         int: the square of the number
     """
-    return num + num
+    return num ** 2
 # Where is the bug in the buggy function?
-# A:
+# A:return statement didn't have **2
 
 
 def is_even(num:int) -> bool:
@@ -114,9 +114,9 @@ def is_even(num:int) -> bool:
     Returns:
         bool: True if the number is even, False otherwise
     """
-    return num % 2 == 1
+    return num % 2 == 0
 # Where is the bug in the buggy function?
-# A:
+# A: return statement had ==1 instead of ==0
 
 
 def grade_calculator(score:float) -> str:
@@ -128,20 +128,20 @@ def grade_calculator(score:float) -> str:
     Returns:
         str: the grade for the score
     """
-    if 90 <= score <= 100:
+    if score >= 90 and score <= 100:
         return "A"
-    elif 80 <= score < 90:
-        return "B"
-    elif 70 <= score < 79:
-        return "C"
-    elif 60 <= score < 70:
+    elif score >= 80 and score < 90:
+        return "B"  
+    elif score >= 70 and score < 80:
+        return "C"  
+    elif score >= 60 and score < 70:    
         return "D"
-    elif 0 <= score < 60:
+    elif score >= 0 and score < 60:
         return "F"
     else:
         return "Invalid Score"
 # Where is the bug in the buggy function?
-# A:
+# A: The variable score was not in the proper place in the elif statements
 
 def speed_check(speed:float) -> str:
     """Check if the speed is within the speed limit
@@ -155,14 +155,14 @@ def speed_check(speed:float) -> str:
     # Assuming general speed limits: min: 20, max: 70 (in mph)
     if speed < 20:  
         return "Too slow"
-    elif 20 <= speed <= 60:
+    elif speed >= 20 and speed <= 70:
         return "Within limit"
     elif speed > 70: 
         return "Over speed limit"
     else:
         return "Unknown"
 # Where is the bug in the buggy function?
-# A:
+# A: putting the number after elif instead of the variable speed
 
 def is_leap_year(year:int) -> bool:
     """Check if a year is a leap year
@@ -173,16 +173,14 @@ def is_leap_year(year:int) -> bool:
     Returns:
         bool: True if the year is a leap year, False otherwise
     """
-    if year % 4 == 0:
-        return True
-    elif year % 100 == 0:
-        return False
-    elif year % 400 == 0:
+    if ((year % 400 == 0) or 
+        (year % 100 != 0) and
+        (year % 4 == 0)):
         return True
     else:
-        return False
+        return False  
 # Where is the bug in the buggy function?
-# A:
+# A: Logic was wrong 
 
 def main():
     print("You are running me directly!")
