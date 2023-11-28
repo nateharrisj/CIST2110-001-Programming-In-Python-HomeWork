@@ -18,7 +18,7 @@ print("Welcome to the Contact List Program")
 
 # There is also a contact.csv file that will be used to store the contacts. The csv file will have the following format:
 # Name,Phone,Email,Birthday
-# The program will be menu driven and will display the menu as shown above. The program will run until the user selects option 4 to quit. The program will be implemented in a file called Project2.py. The program will use the following functions:
+# The program will be menu driven and will display the menu as shown above. The program will run until the user selects option 0 to quit. The program will be implemented in a file called Project2.py. The program will use the following functions:
 
 
 # import_csv - This function will import the contacts from the csv file. The function will return a dictionary of contacts. The key will be the name of the contact and the value will be a dictionary containing the phone number, email address, and birthday. The function will take one parameter, the name of the csv file. The function will display an error message if the file does not exist. The function will display a message if the file exists and the contacts were imported successfully.
