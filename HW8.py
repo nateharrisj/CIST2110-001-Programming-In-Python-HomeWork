@@ -120,7 +120,7 @@ def days_until_new_years(nydate) -> int:
 # 4. create a button that will display the number of days until New Year's Day when clicked. The button should be labeled "Days until New Year's Day". The button should call the 
 # days_until_new_years function when clicked. The button should be placed below the "Calculate" button.Inside the app function call the days_until_new_years function when the button is clicked.
 
-#NewYearsButton = sl.button("Days until New Year's Day")
+#NewYearsButton = sl.button("Days until New Year's Day"), put this up top with the other buttons
 
 # Hint: You can use the st.button() function. IE. button = st.button("Click me")
 # Hint2: the days_until_new_years function takes in the current date as a parameter. You can use the dt.datetime.now().date() function to get the current date. 
