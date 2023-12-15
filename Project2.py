@@ -11,13 +11,9 @@
 # Import the csv module, datetime module
 import csv
 import datetime as dt
-import os
-import sys
 import tabulate
+import os
 
-# Make sure to show docs strings for each function and include comments in your code. Make sure to include a main function and call the main function at the end of the program.
-
-print("Welcome to the Contact List Program")
 
 # There is also a contact.csv file that will be used to store the contacts. The csv file will have the following format:
 # Name,Phone,Email,Birthday
@@ -27,7 +23,7 @@ print("Welcome to the Contact List Program")
 # import_csv - This function will import the contacts from the csv file. The function will return a dictionary of contacts. The key will be the name of the contact and the value will be a dictionary containing the phone number, email address, and birthday. The function will take one parameter, the name of the csv file. The function will display an error message if the file does not exist. The function will display a message if the file exists and the contacts were imported successfully.
 # Hint1: Use the csv module to read the csv file. Use the csv.reader function. IE. reader = csv.reader(file)
 
-with open('contacts.csv', 'r') as file:
+with open('contacts.csv', 'r', encoding='utf-8') as file:
     reader = csv.reader(file)
     for row in reader:
         print(row)
@@ -57,18 +53,47 @@ for row in reader:
 # Hint 2: To add a contact to the dictionary, you need to use the key as the name and the values as a dictionary that contains the phone number, email address, and birthday. To reference the specific key you can use contact[name]
 
 def add_contact(name, phone, email, birthday):
+    contact[name] = {'Phone': phone, 'Email': email, 'Birthday': dt.datetime.strptime(birthday, '%m/%d/%Y')}
+    return True
 
 # view_contacts() - This function will display the contacts in the dictionary. The function will take no parameters. The function will return nothing. The function will display a message if there are no contacts in the dictionary. Use string formatting to display the contacts in a table format. The table should have a header row and each contact should be on a separate row. The table should have the following columns: Name, Phone, Email, Birthday. The birthday should be formatted as mm/dd/yyyy. The table should be sorted by name.
 # Hint 1: You will need to loop through the dictionary to display the contacts. IE. for key, value in contact.items():
 # Extra Credit: The data is a dictionary of dictionaries. You can unpack the dictionary into a list of dictionaries. Like in Lab 10 and then use the tabulate library to display the contacts in a table format. This is optional and not required. You can use string formatting to display the contacts in a table format.
 
+def view_contacts():
+    print(tabulate.tabulate(contact, headers="keys", tablefmt="grid"))
+
 
 # delete_contact(id) - This function will delete a contact from the dictionary. The function will take one parameter, the name of the contact to delete. The function will return True if the contact was deleted and False if the contact was not deleted. The function will display an error message if the contact does not exist.
 
+def delete_contact(name):
+    if name in contact:
+        del contact[name]
+        return True
+    else:
+        return False
+
 # next_birthday() - This function will display the next birthday. The function will take no parameters. The function will return nothing. The function will display a message if there are no contacts in the dictionary. The function will display a message if there are no birthdays in the next 30 days. The function will display the next birthday and name if there is a birthday in the next 30 days. Use string formatting to display the next birthday. The next birthday should be sorted by the next birthday. The next birthday should be formatted as mm/dd/yyyy.
 # Hint: We dont care about the year, only the month and day. There are many ways to solve this issue. 1st you could replace all the years with the current year.2nd you could use the month and day attributes of the datetime object to compare the month and day of the birthday to the current month and day.
+    
+def next_birthday():
+    today = dt.datetime.today()
+    next_birthday = dt.datetime(2021, 12, 31)
+    for key, value in contact.items():
+        if value['Birthday'].month == today.month and value['Birthday'].day == today.day:
+            print(f'{key}\'s birthday is today!')
+        elif value['Birthday'].month == today.month and value['Birthday'].day > today.day:
+            if value['Birthday'] < next_birthday:
+                next_birthday = value['Birthday']
+                next_birthday_name = key
+    if next_birthday == dt.datetime(2021, 12, 31):
+        print('There are no birthdays in the next 30 days')
+    else:
+        print(f'The next birthday is {next_birthday_name} on {next_birthday.strftime("%m/%d/%Y")}')
 
 # save_csv(filename) - This function will save the contacts to the csv file. Prompt the user to enter a filename to save the contacts to. If the file exists, overwrite the file. If the file does not exist, create the file. The function will return True if the contacts were saved and False if the contacts were not saved.
+        
+def save_csv(filename):
 
 # The main function will be used to run the program. The main function will use a while loop to display the menu and get the user's choice. The main function will call the appropriate function based on the user's choice. The main function will also call the save_csv function to save the contacts to the csv file before the program ends.
 
