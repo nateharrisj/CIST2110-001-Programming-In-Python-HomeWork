@@ -1,5 +1,5 @@
 # Import Statments
-import pytest
+
 from Project3 import Book, User, Library
 
 #  ________  ________  ________        ___  _______   ________ _________        ________
@@ -9,7 +9,8 @@ from Project3 import Book, User, Library
 #   \ \  \___|\ \  \\  \\ \  \\\  \|\  \\_\  \ \  \_|\ \ \  \____   \ \  \          __\_\  \
 #    \ \__\    \ \__\\ _\\ \_______\ \________\ \_______\ \_______\  \ \__\        |\_______\
 #     \|__|     \|__|\|__|\|_______|\|________|\|_______|\|_______|   \|__|        \|_______|
-# Author:
+
+# Author: Nate Harris
 # CIST2110-001-Project-3 Library Management System (LMS) Test Cases
 
 
@@ -24,14 +25,14 @@ def test_book_creation():
 
 def test_book_checkout():
     book = Book("Test Book", "Author Name", 1234567890)
-    book.check_out()
+    book.checkout()
     assert book.borrowed
 
 
-def test_book_return():
+def test_book_returned():
     book = Book("Test Book", "Author Name", 1234567890)
-    book.check_out()
-    book.check_in()
+    book.checkout()
+    book.returned()
     assert not book.borrowed
 
 
@@ -43,7 +44,7 @@ def test_user_creation():
     assert user.borrowed_books == []
 
 
-def test_user_borrow():
+def test_user_borrow_book():
     user = User("John Doe", 1)
     book = Book("Test Book", "Author Name", 1234567890)
     user.borrow_book(book)
@@ -51,9 +52,13 @@ def test_user_borrow():
     assert book.borrowed
 
 
-def test_user_return():
-    ### Implement this test case ###
-    pass  # Remove this line when you implement this test case
+def test_user_return_book():
+    user = User("John Doe", 1)
+    book = Book("Test Book", "Author Name", 1234567890)
+    user.borrow_book(book)
+    user.return_book(book)
+    assert book not in user.borrowed_books
+    assert not book.borrowed
 
 
 # Test cases for the Library class
@@ -80,5 +85,8 @@ def test_library_find_book():
 
 
 def test_library_find_user():
-    ### Implement this test case ###
-    pass  # Remove this line when you implement this test case
+    library = Library()
+    user = User("John Doe", 1)
+    library.add_user(user)
+    found = library.find_user(1)
+    assert found == user
