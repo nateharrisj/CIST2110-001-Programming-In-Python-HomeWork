@@ -13,7 +13,6 @@ import csv
 import datetime as dt
 import tabulate
 import os
-from typing import Dict
 
 
 # There is also a contact.csv file that will be used to store the contacts. The csv file will have the following format:
@@ -29,6 +28,7 @@ from typing import Dict
 
 # Declare the 'contact' dictionary
 contact = {}
+
 def import_csv(filename):
 
     if os.path.exists(filename):
@@ -36,11 +36,14 @@ def import_csv(filename):
             next(file)
             reader = csv.reader(file)
             for row in reader:
-                contact[row[0]] = {
-                    "Phone": row[1],
-                    "Email": row[2],
-                    "Birthday": dt.datetime.strptime(row[3], "%m/%d/%Y"),
-                }
+                #if len(row) >=4:
+                    contact[row[0]] = {
+                        "Phone": row[1],
+                        "Email": row[2],
+                        "Birthday": dt.datetime.strptime(row[3], "%m/%d/%Y"),
+                    }
+                #else:
+                    #print("Row does not have enough elements")
         print("Contacts imported successfully")
     else:
         raise FileNotFoundError("File does not exist")
@@ -68,6 +71,8 @@ def add_contact(name, phone, email, birthday):
 
     
 def view_contacts():
+    """This function will display the contacts in the dictionary. The function will take no parameters. The function will return nothing. The function will display a message if there are no contacts in the dictionary. Use string formatting to display the contacts in a table format. The table should have a header row and each contact should be on a separate row. The table should have the following columns: Name, Phone, Email, Birthday. The birthday should be formatted as mm/dd/yyyy. The table should be sorted by name."""
+
     if not contact:
         print("No contacts available")
 
@@ -103,18 +108,25 @@ def view_contacts():
 
 
 def delete_contact(name):
+    """This function will delete a contact from the dictionary. The function will take one parameter, the name of the contact to delete. The function will return True if the contact was deleted and False if the contact was not deleted. The function will display an error message if the contact does not exist."""
+
     if name in contact:
         del contact[name]
         return True
+    elif name not in contact:
+        print("Contact does not exist")
     else:
-        return False
-
+        return False   
 
 # next_birthday() - This function will display the next birthday. The function will take no parameters. The function will return nothing. The function will display a message if there are no contacts in the dictionary. The function will display a message if there are no birthdays in the next 30 days. The function will display the next birthday and name if there is a birthday in the next 30 days. Use string formatting to display the next birthday. The next birthday should be sorted by the next birthday. The next birthday should be formatted as mm/dd/yyyy.
 # Hint: We dont care about the year, only the month and day. There are many ways to solve this issue. 1st you could replace all the years with the current year.2nd you could use the month and day attributes of the datetime object to compare the month and day of the birthday to the current month and day.
 
 
 def next_birthday():
+    """This function will display the next birthday as long as it is within 30 days. If there is a birthday in the next 30 days. Use string formatting to display the next birthday. The next birthday should be sorted by the next birthday. The next birthday should be formatted 
+    as mm/dd/yyyy.
+    """
+
     today = dt.datetime.today()
     nxt_birthday = dt.datetime(2024, 12, 31)
     for key, value in contact.items():
@@ -207,8 +219,14 @@ def main():
 
     # After you are done with the program, answer the following questions using code (show your code and output):
     # How many names start with the letter A?
+    
+    if name.startswith("A"):
+        print(name)
 
     # How many emails are yahoo emails?
+        
+        if email.endswith("yahoo.com"):
+            print(email)
 
     # How many .org emails are there?
 
